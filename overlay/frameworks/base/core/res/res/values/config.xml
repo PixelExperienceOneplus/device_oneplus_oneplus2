@@ -72,8 +72,8 @@
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
-    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option 
-    <bool name="config_intrusiveBatteryLed">true</bool> -->
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option --> 
+    <bool name="config_intrusiveBatteryLed">true</bool> 
 
     <!-- Button illumination 
     <bool name="config_deviceHasVariableButtonBrightness">true</bool> -->
@@ -114,8 +114,8 @@
             32 - Camera
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
-         config to 7. 
-    <integer name="config_deviceHardwareKeys">83</integer> -->
+         config to 7. -->
+    <integer name="config_deviceHardwareKeys">83</integer> 
 
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -413,5 +413,18 @@
 
     <!-- Keep chosen default camera app pinned in memory for faster launching -->
     <bool name="config_pinnerCameraApp">true</bool>
+
+    <!-- Does the battery LED support multiple colors?
+         Used to decide if the user can change the colors -->
+    <bool name="config_multiColorBatteryLed">true</bool>
+
+    <!-- Do the battery/notification LEDs support pulsing?
+         Used to decide if we show pulse settings -->
+    <bool name="config_ledCanPulse">true</bool>
+    
+    <!-- Button illumination settings -->
+    <bool name="config_deviceHasButtonBacklight">true</bool>
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
+    <integer name="config_buttonBrightnessSettingDefault">128</integer> 
 
 </resources>
