@@ -57,6 +57,11 @@ on init
 
     chmod 0644 /proc/cmdline
     symlink /sdcard /storage/sdcard0
+    
+    write /sys/devices/soc.0/f9824900.sdhci/clkscale_enable 0
+    write /sys/devices/soc.0/f9824900.sdhci/clkgate_enable 0
+    write /sys/devices/soc.0/f9824900.sdhci/hibern8_on_idle_enable 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled Y
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -488,11 +493,14 @@ on post-fs-data
 
 on property:sys.boot_completed=1
     #allow CPUs to go in deeper idle state than C0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled N
+    write /sys/devices/soc.0/f9824900.sdhci/clkscale_enable 1
+    write /sys/devices/soc.0/f9824900.sdhci/clkgate_enable 1
+    write /sys/devices/soc.0/f9824900.sdhci/hibern8_on_idle_enable 1
     start perfd
     start tfa-sh
     start zram-init
-    write /dev/kmsg "Boot completed "
+    write /dev/kmsg "Boot completed"
 
     # Set Memory parameters
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
@@ -659,7 +667,6 @@ on property:init.svc.bootanim=running
     write /sys/module/lpm_levels/system/a57/cpu7/retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 on property:init.svc.bootanim=stopped
     start usf-post-boot
