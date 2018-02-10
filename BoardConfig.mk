@@ -112,6 +112,10 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 # DT2W
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
 
+# CNE and DPM
+TARGET_LDPRELOAD := libNimsWrap.so
+BOARD_USES_QCNE := true
+
 # Filesystem
 TARGET_FS_CONFIG := $(PLATFORM_PATH)/config.fs
 
